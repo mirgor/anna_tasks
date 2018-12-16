@@ -1,0 +1,340 @@
+На сайті IMDB є можливість завантажити файли з даними про усі відзняті фільми. Для цього потрібно пройти за посиланням http://www.imdb.com/interfaces і обрати одне з трьох посилань. Для того, щоб відкрити файли вам потрібно розархівувати їх, використовуючи наприклад 7-Zip. 
+
+Кожен з файлів містить дані в певному форматі та певного призначення. Детальну інформацію про дані можна дізнатися на сторінці IMDb Dataset Details або з файлу imdb_readme. 
+
+Також доступна для завантаження старша версія цієї бази, яка містить наступні файли:
+
+actors.list
+actresses.list
+aka-names.list
+aka-titles.list
+alternate-versions.list
+biographies.list
+business.list
+certificates.list
+color-info.list
+complete-cast.list
+complete-crew.list
+composers.list
+costume-designers.list
+countries.list
+crazy-credits.list
+directors.list
+distributors.list
+genres.list
+keywords.list
+language.list
+literature.list
+locations.list
+movies.list
+plot.list
+ratings.list
+writers.list
+
+На основі отриманих даних:
+
+1. Дослідіть дані та оберіть ті, які вас зацікавили. Наприклад, архів ratings.list.gz містить дані з усіма фільмами та їхніми рейтингами. 
+
+2. На основі обраних даних запропонуйте тему дослідження. 
+
+Можливі теми:
+
+"Динаміка кіновиробництва в Україні у порівнянні з іншими країнами світу"
+"У якому історичному періоді було відзнято найбільше фільмів, що входять у топ 1000 IMDB?"
+"Фільмографія Володимира Палагнюка (Jack Palance)"
+"Рейтинги фільмів Едварда Дмитрика"
+...
+3. Розробіть програму для проведення дослідження.  Приклад дослідження додано у прикріпленому архіві. Інші приклади подібних досліджень також можна знайти на різноманітних ресурсах. Наприклад, https://nycdatascience.com/blog/student-works/web-scraping/movie-rating-prediction/ , https://www.kaggle.com/arillo03/imdb-movie-dataset-analysis , https://www.kaggle.com/ajithpanner/simple-imdb-data-analysis 
+
+
+
+Результатом виконання домашнього завдання повинно бути:
+1. Короткий звітом про своє дослідження (pdf-файл). Звіт повинен містити тему вашого дослідження, його опис, інформацію про дані, які ви використовуєте та отримані результати. Для підготовки звіту і графіків ви можете використовувати Microsoft Excel
+
+2. Модулі програми. Обсяг коду повинен становити не менше ніж 300 рядків.
+
+Результати потрібно здати у вигляд zip-архіву з назвою report_Name_Surname.zip.
+
+Якщо у вас є проблеми з визначенням теми свого дослідження, то зверніться за допомогою до викладачів і вони допоможуть з вибором.
+
+
+-----------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+  GNU nano 2.9.3                                                                           title.crew1.tsv                                                                                      
+
+tconst  directors       writers
+tt0000001       nm0005690       \N
+tt0000002       nm0721526       \N
+tt0000003       nm0721526       \N
+tt0000004       nm0721526       \N
+tt0000005       nm0005690       \N
+tt0000006       nm0005690       \N
+tt0000007       nm0005690,nm0374658     \N
+tt0000008       nm0005690       \N
+tt0000009       nm0085156       nm0085156
+tt0000010       nm0525910       \N
+tt0000011       nm0804434       \N
+tt0000012       nm0525908,nm0525910     \N
+tt0000013       nm0525910       \N
+tt0000014       nm0525910       \N
+tt0000015       nm0721526       \N
+tt0000016       nm0525910       \N
+tt0000017       nm0804434,nm1587194     \N
+tt0001525       nm0294276       \N
+tt0001526       nm0408436       \N
+tt0001527       nm0823088       nm0823088
+tt0001528       nm0048478       \N
+tt0001529       nm0877783,nm0091767     nm0574737,nm0877783
+tt0001530       nm0738202       \N
+tt0001531       nm0738202       nm0092809,nm1010943
+tt0001532       nm0550220,nm0063412,nm0063413   nm0550220,nm0617737,nm0063412
+tt0001533       nm0001908       nm0001908
+
+
+
+title.principals1.tsv
+
+tconst  ordering        nconst  category        job     characters
+tt0000001       1       nm1588970       self    \N      ["Herself"]
+tt0000001       2       nm0005690       director        \N      \N
+tt0000001       3       nm0374658       cinematographer director of photography \N
+tt0000002       1       nm0721526       director        \N      \N
+tt0000002       2       nm1335271       composer        \N      \N
+tt0000003       1       nm0721526       director        \N      \N
+tt0000003       2       nm5442194       producer        producer        \N
+tt0000003       3       nm1335271       composer        \N      \N
+tt0000003       4       nm5442200       editor  \N      \N
+tt0000004       1       nm0721526       director        \N      \N
+tt0000004       2       nm1335271       composer        \N      \N
+tt0000005       1       nm0443482       actor   \N      ["Blacksmith"]
+tt0000005       2       nm0653042       actor   \N      ["Assistant"]
+tt0000005       3       nm0005690       director        \N      \N
+tt0000005       4       nm0249379       producer        producer        \N
+tt0000006       1       nm0005690       director        \N      \N
+tt0000007       1       nm0179163       actor   \N      \N
+tt0000007       2       nm0183947       actor   \N      \N
+tt0000007       3       nm0005690       director        \N      \N
+tt0000007       4       nm0374658       director        \N      \N
+tt0000007       5       nm0249379       producer        producer        \N
+tt0000008       1       nm0653028       actor   \N      ["Sneezing Man"]
+tt0000008       2       nm0005690       director        \N      \N
+tt0000008       3       nm0374658       cinematographer \N      \N
+tt0000009       1       nm0063086       actress \N      ["Miss Geraldine Holbrook (Miss Jerry)"]
+tt0000009       2       nm0183823       actor   \N      ["Mr. Hamilton"]
+tt0000009       3       nm1309758       self    \N      ["Himself - the Director of the New York Central Railroad"]
+tt0000009       4       nm0085156       director        \N      \N
+tt0000010       1       nm0525910       director        \N      \N
+tt0000011       1       nm3692297       actor   \N      ["Acrobats"]
+tt0000011       2       nm0804434       director        \N      \N
+tt0000012       1       nm2880396       self    \N      ["Herself"]
+tt0000012       2       nm9735580       self    \N      ["Himself"]
+tt0000012       3       nm0525900       self    \N      ["Herself"]
+tt0052053       8       nm0363899       producer        producer        \N
+tt0052053       9       nm0932579       producer        producer        \N
+tt0052054       10      nm0269894       actor   \N      \N
+tt0052054       1       nm0464392       actor   \N      ["Pastor Jarman"]
+tt0052054       2       nm0594934       actress \N      ["Lilly"]
+tt0052054       3       nm0539871       actor   \N      ["Tor"]
+tt0052054       4       nm0845622       actor   \N      ["Makken"]
+tt0052054       5       nm0804752       director        \N      \N
+tt0052054       6       nm0845652       composer        \N      \N
+
+
+  GNU nano 2.9.3                                                                           title.akas1.tsv                                                                                      
+
+titleId ordering        title   region  language        types   attributes      isOriginalTitle
+tt0000001       1       Carmencita - spanyol tánc       HU      \N      imdbDisplay     \N      0
+tt0000001       2       Карменсита      RU      \N      \N      \N      0
+tt0000001       3       Carmencita      US      \N      \N      \N      0
+tt0000001       4       Carmencita      \N      \N      original        \N      1
+tt0000002       1       Le clown et ses chiens  \N      \N      original        \N      1
+tt0000002       2       A bohóc és kutyái       HU      \N      imdbDisplay     \N      0
+tt0000002       3       Le clown et ses chiens  FR      \N      \N      \N      0
+tt0000002       4       Clovnul si cainii sai   RO      \N      imdbDisplay     \N      0
+tt0000002       5       The Clown and His Dogs  US      \N      \N      literal English title   0
+tt0000002       6       Клоун и его собаки      RU      \N      \N      \N      0
+tt0000003       1       Sarmanul Pierrot        RO      \N      imdbDisplay     \N      0
+tt0000003       2       Szegény Pierrot HU      \N      imdbDisplay     \N      0
+tt0000003       3       Бедный Пьеро    RU      \N      \N      \N      0
+tt0000003       4       Pauvre Pierrot  \N      \N      original        \N      1
+tt0000003       5       Poor Pierrot    \N      \N      \N      \N      0
+tt0000003       6       Pauvre Pierrot  FR      \N      \N      \N      0
+tt0000004       1       Un bon bock     \N      \N      original        \N      1
+tt0000004       2       Un ţap de bere  RO      \N      \N      \N      0
+tt0000004       3       Un bon bock     FR      \N      \N      \N      0
+tt0000004       4       Полная кружка пива      RU      \N      \N      \N      0
+tt0000004       5       A Good Beer     \N      \N      \N      \N      0
+tt0000004       6       Egy jó pohár sör        HU      \N      imdbDisplay     \N      0
+tt0000005       1       Blacksmithing Scene     US      \N      alternative     \N      0
+tt0000005       2       Сцена в кузне   RU      \N      \N      \N      0
+tt0000005       3       Blacksmith Shop GB      \N      \N      informal alternative title      0
+tt0000005       4       Blacksmith Scene #1     US      \N      alternative     \N      0
+tt0000005       5       Blacksmithing   US      \N      \N      informal alternative title      0
+tt0070233       10      Iivana Julma Bulgakov   FI      \N      imdbDisplay     \N      0
+tt0070233       11      Ivan the Terrible: Back to the Future   US      \N      \N      \N      0
+tt0070233       12      Iwan Wasiljewicz zmienia zawód  PL      \N      imdbDisplay     \N      0
+tt0070233       13      Иван Васильевич меняет профессию        RU      \N      \N      \N      0
+tt0070233       14      Ivan den förskräcklige byter yrke       SE      \N      imdbDisplay     \N      0
+tt0070233       15      Iwan Wassiljewitsch wechselt den Beruf  DDDE    \N      \N      \N      0
+tt0070233       16      Ivan Vasilievich: Back to the Future    XWW     en      \N      \N      0
+tt0070233       17      O Ivan Vasilievich allazei epangelma    GR      \N      \N      transliterated ISO-LATIN-1 title        0
+tt0070233       18      Iivana Julma    FI      \N      imdbDisplay     \N      0
+tt0070233       19      Ivan Vasilievich: Back to the Future    US      \N      \N      \N      0
+tt0070233       1       Ivan Vasilevich menyaet professiyu      \N      \N      original        \N      1
+tt0070233       2       Halló, itt Iván cár!    HU      \N      imdbDisplay     \N      0
+
+
+  GNU nano 2.9.3                                                                              names.tsv                                                                                         
+
+nconst  primaryName     birthYear       deathYear       primaryProfession       knownForTitles
+nm0000001       Fred Astaire    1899    1987    soundtrack,actor,miscellaneous  tt0072308,tt0043044,tt0050419,tt0053137
+nm0000002       Lauren Bacall   1924    2014    actress,soundtrack      tt0117057,tt0037382,tt0038355,tt0071877
+nm0000003       Brigitte Bardot 1934    \N      actress,soundtrack,producer     tt0049189,tt0059956,tt0057345,tt0054452
+nm0000004       John Belushi    1949    1982    actor,writer,soundtrack tt0072562,tt0078723,tt0080455,tt0077975
+nm0000005       Ingmar Bergman  1918    2007    writer,director,actor   tt0050986,tt0060827,tt0083922,tt0050976
+nm0000006       Ingrid Bergman  1915    1982    actress,soundtrack,producer     tt0071877,tt0038109,tt0038787,tt0034583
+nm0000007       Humphrey Bogart 1899    1957    actor,soundtrack,producer       tt0034583,tt0037382,tt0043265,tt0033870
+nm0000008       Marlon Brando   1924    2004    actor,soundtrack,director       tt0068646,tt0070849,tt0047296,tt0078788
+nm0000009       Richard Burton  1925    1984    actor,producer,soundtrack       tt0059749,tt0061184,tt0057877,tt0087803
+nm0000010       James Cagney    1899    1986    actor,soundtrack,director       tt0031867,tt0055256,tt0035575,tt0029870
+nm0000011       Gary Cooper     1901    1961    actor,soundtrack,producer       tt0034167,tt0027996,tt0044706,tt0052876
+nm0000012       Bette Davis     1908    1989    actress,soundtrack,make_up_department   tt0035140,tt0056687,tt0031210,tt0042192
+nm0000013       Doris Day       1922    \N      soundtrack,actress,producer     tt0053172,tt0060463,tt0048317,tt0055100
+nm0000014       Olivia de Havilland     1916    \N      actress,soundtrack      tt0040806,tt0031381,tt0029843,tt0041452
+nm0000015       James Dean      1931    1955    actor,miscellaneous     tt0045458,tt0048028,tt0049261,tt0048545
+nm0000016       Georges Delerue 1925    1992    composer,soundtrack,music_department    tt0091763,tt0069946,tt0080610,tt0096320
+nm0000017       Marlene Dietrich        1901    1992    soundtrack,actress,music_department     tt0055031,tt0051201,tt0021156,tt0052311
+nm0000018       Kirk Douglas    1916    \N      actor,producer,soundtrack       tt0052365,tt0049456,tt0080736,tt0054331
+nm0000019       Federico Fellini        1920    1993    writer,director,assistant_director      tt0047528,tt0053779,tt0056801,tt0071129
+nm0000020       Henry Fonda     1905    1982    actor,producer,soundtrack       tt0032551,tt0050083,tt0064116,tt0082846
+nm0000021       Joan Fontaine   1917    2013    actress,soundtrack,producer     tt0034248,tt0032976,tt0039504,tt0036969
+nm0000022       Clark Gable     1901    1960    actor,soundtrack,producer       tt0025316,tt0026205,tt0026752,tt0031381
+nm0000023       Judy Garland    1922    1969    soundtrack,actress      tt0047522,tt0037059,tt0032138,tt0055031
+nm0000024       John Gielgud    1904    2000    actor,writer,director   tt0071877,tt0117631,tt0082031,tt0045943
+nm0000025       Jerry Goldsmith 1929    2004    music_department,soundtrack,composer    tt0117731,tt0100802,tt0119488,tt0112715
+nm0000026       Cary Grant      1904    1986    actor,soundtrack,producer       tt0053125,tt0048728,tt0036613,tt0056923
+nm0000134       Robert De Niro  1943    \N      actor,producer,soundtrack       tt0075314,tt0101540,tt0070379,tt0081398
+nm0000135       John Denver     1943    1997    soundtrack,music_department,actor       tt0076489,tt0120591,tt3967856,tt4649466
+nm0000136       Johnny Depp     1963    \N      actor,producer,soundtrack       tt0325980,tt0408236,tt0449088,tt0383574
+nm0000137       Bo Derek        1956    \N      actress,producer,miscellaneous  tt0114694,tt0086987,tt0083170,tt0099656
+nm0000138       Leonardo DiCaprio       1974    \N      actor,producer,writer   tt0407887,tt1375666,tt0120338,tt0993846
+
+
+  GNU nano 2.9.3                                                                          title.basics1.tsv                                                                                     
+
+tconst  titleType       primaryTitle    originalTitle   isAdult startYear       endYear runtimeMinutes  genres
+tt0000001       short   Carmencita      Carmencita      0       1894    \N      1       Documentary,Short
+tt0000002       short   Le clown et ses chiens  Le clown et ses chiens  0       1892    \N      5       Animation,Short
+tt0000003       short   Pauvre Pierrot  Pauvre Pierrot  0       1892    \N      4       Animation,Comedy,Romance
+tt0000004       short   Un bon bock     Un bon bock     0       1892    \N      \N      Animation,Short
+tt0000005       short   Blacksmith Scene        Blacksmith Scene        0       1893    \N      1       Comedy,Short
+tt0000006       short   Chinese Opium Den       Chinese Opium Den       0       1894    \N      1       Short
+tt0000007       short   Corbett and Courtney Before the Kinetograph     Corbett and Courtney Before the Kinetograph     0       1894    \N      1       Short,Sport
+tt0000008       short   Edison Kinetoscopic Record of a Sneeze  Edison Kinetoscopic Record of a Sneeze  0       1894    \N      1       Documentary,Short
+tt0000009       movie   Miss Jerry      Miss Jerry      0       1894    \N      45      Romance
+tt0000010       short   Exiting the Factory     La sortie de l'usine Lumière à Lyon     0       1895    \N      1       Documentary,Short
+tt0000011       short   Akrobatisches Potpourri Akrobatisches Potpourri 0       1895    \N      1       Documentary,Short
+tt0000012       short   The Arrival of a Train  L'arrivée d'un train à La Ciotat        0       1896    \N      1       Documentary,Short
+tt0000013       short   The Photographical Congress Arrives in Lyon     Neuville-sur-Saône: Débarquement du congrès des photographes à Lyon     0       1895    \N      1       Documentary,Sho$
+tt0000014       short   Tables Turned on the Gardener   L'arroseur arrosé       0       1895    \N      1       Comedy,Short
+tt0000015       short   Autour d'une cabine     Autour d'une cabine     0       1894    \N      2       Animation,Short
+tt0000016       short   Barque sortant du port  Barque sortant du port  0       1895    \N      1       Documentary,Short
+tt0000017       short   Italienischer Bauerntanz        Italienischer Bauerntanz        0       1895    \N      1       Documentary,Short
+tt0000018       short   Das boxende Känguruh    Das boxende Känguruh    0       1895    \N      1       Short
+tt0000019       short   The Clown Barber        The Clown Barber        0       1898    \N      \N      Comedy,Short
+tt0000020       short   The Derby 1895  The Derby 1895  0       1895    \N      1       Documentary,Short,Sport
+tt0000022       short   Blacksmith Scene        Les forgerons   0       1895    \N      1       Documentary,Short
+tt0000023       short   The Sea Baignade en mer 0       1895    \N      1       Documentary,Short
+tt0000024       short   Opening of the Kiel Canal       Opening of the Kiel Canal       0       1895    \N      \N      News,Short
+tt0000025       short   The Oxford and Cambridge University Boat Race   The Oxford and Cambridge University Boat Race   0       1895    \N      \N      News,Short,Sport
+tt0000026       short   The Messers. Lumière at Cards   Partie d'écarté 0       1896    \N      1       Documentary,Short
+tt0000027       short   Cordeliers' Square in Lyon      Place des Cordeliers à Lyon     0       1895    \N      1       Documentary,Short
+tt0000028       short   Fishing for Goldfish    La pêche aux poissons rouges    0       1895    \N      1       Documentary,Short
+tt0000029       short   Baby's Dinner   Repas de bébé   0       1895    \N      1       Documentary,Short
+tt0000030       short   Rough Sea at Dover      Rough Sea at Dover      0       1895    \N      1       Documentary,Short
+tt0000031       short   Jumping the Blanket     Le saut à la couverture 0       1895    \N      1       Documentary,Short
+tt0000032       short   Die Serpentintänzerin   Die Serpentintänzerin   0       1895    \N      1       Short
+tt0000033       short   Trick Riding    La voltige      0       1895    \N      1       Comedy,Documentary,Short
+tt0000034       short   Arrivée d'un train gare de Vincennes    Arrivée d'un train gare de Vincennes    0       1896    \N      1       Documentary,Short
+tt0000035       short   Watering the Flowers    L'arroseur      0       1896    \N      1       Comedy,Short
+tt0000036       short   Awakening of Rip        Awakening of Rip        0       1896    \N      0       Drama,Short
+tt0000037       short   Sea Bathing     Baignade en mer 0       1896    \N      1       Short
+
+
+  GNU nano 2.9.3                                                                          title.episode1.tsv                                                                                    
+
+tconst  parentTconst    seasonNumber    episodeNumber
+tt0041951       tt0041038       1       9
+tt0042816       tt0989125       1       17
+tt0042889       tt0989125       \N      \N
+tt0043426       tt0040051       3       42
+tt0043631       tt0989125       2       16
+tt0043693       tt0989125       2       8
+tt0043710       tt0989125       3       3
+tt0044093       tt0959862       1       6
+tt0044901       tt0989125       3       46
+tt0045519       tt0989125       4       11
+tt0045960       tt0044284       2       3
+tt0046135       tt0989125       4       5
+tt0046150       tt0341798       \N      \N
+tt0046855       tt0046643       1       4
+tt0046864       tt0989125       5       20
+tt0047810       tt0914702       3       36
+tt0047852       tt0047745       1       15
+tt0047858       tt0046637       2       9
+tt0047961       tt0989125       6       5
+tt0048067       tt0046587       2       20
+tt0048302       tt0047768       1       6
+tt0048371       tt0989125       6       11
+
+
+  GNU nano 2.9.3                                                                          title.ratings1.tsv                                                                                    
+
+tconst  averageRating   numVotes
+tt0000001       5.8     1443
+tt0000002       6.4     174
+tt0000003       6.6     1044
+tt0000004       6.4     104
+tt0000005       6.2     1741
+tt0000006       5.5     93
+tt0000007       5.5     580
+tt0000008       5.6     1541
+tt0000009       5.6     74
+tt0000010       6.9     5144
+tt0000011       5.4     215
+tt0000012       7.4     8637
+tt0000013       5.7     1326
+tt0000014       7.1     3771
+tt0000015       6.2     660
+tt0000016       5.9     987
+tt0000017       4.8     198
+tt0000018       5.5     414
+tt0000019       6.6     13
+tt0000020       5.1     232
+tt0000022       5.2     743
+tt0000023       5.7     936
+tt0000024       5.8     21
+tt0000025       4.8     19
+tt0000026       5.7     1141
+tt0000027       5.6     774
+tt0000028       5.2     704
+tt0000029       5.9     2459
+tt0000030       5.3     596
+tt0000031       5.6     693
+tt0000032       5.2     291
+tt0000033       5.6     735
+tt0000034       5.5     102
+tt0000035       5.8     46
+tt0000036       4.5     416
+tt0000037       4.8     34
+tt0000038       4.3     128
+tt0000039       4.6     11
+tt0000040       4.4     30
+tt0000041       6.7     1205
+
+
