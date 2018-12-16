@@ -3,71 +3,6 @@ import sys
 from itertools import islice
 import pandas as pd
 
-#for i in range(100+1):
-#    sys.stdout.write(('='*i)+(''*(100-i))+("\r [ %d"%i+"% ] "))
-#    sys.stdout.flush()
-# comment
-
-def read_ratings1():
-    print("Input the minimal rating, please: ")
-    rating = input()
-    print("Input the minimal number of votes(from 100000): ")
-    votes = input()
-    with open('title.ratings1.tsv', 'r') as f:
-        next(f) # skip headings
-        reader = csv.reader(f, delimiter='\t')
-        num = 0
-        film_code_set = set()
-        for line in reader:
-            if float(line[1]) > int(rating):
-                if int(line[2]) > int(votes):
-                    film_code_set.add(line[0])
-                    num += 1
-        print(film_code_set)
-        print(num)
-        return [num, film_code_set]
-
-
-def read_principals1(num, film_code_set):
-    # print(num)
-    with open('title.principals1.tsv', 'r', encoding="utf-8") as f:
-        next(f)
-        reader = csv.reader(f, delimiter='\t')
-        n = 0
-        set_with_actors = set()
-        for line in reader:
-            if line[0] in film_code_set:
-                if line[3] == "actor" or line[3] == "actress":
-                    # show progress
-                    sys.stdout.write(('.'*(n//10))+("\r Num of actors: [ %d"%n+" ] "))
-                    sys.stdout.flush()
-                    set_with_actors.add(line[2])
-                    n += 1
-    lst_with_actors = list(set_with_actors)
-    print("\n Num of actors:", n)
-    print(set_with_actors)
-    return [n, set_with_actors, lst_with_actors]
-
-
-def make_actors_dict(n, set_with_actors, lst_with_actors):
-    with open('title.principals1.tsv', 'r', encoding="utf-8") as f:
-        next(f)
-        reader = csv.reader(f, delimiter='\t')
-        actor_films_dict = dict()
-        temp_lst = []
-        for line in reader:
-            if line[2] in set_with_actors:
-                temp_lst.append(line)
-        for i in range(n):
-            temp_lst2 = []
-            for j in range(len(temp_lst)):
-                if temp_lst[j][2] == lst_with_actors[i]:
-                    temp_lst2.append(temp_lst[j][0])
-            actor_films_dict[lst_with_actors[i]] = temp_lst2
-    print(actor_films_dict)
-    return actor_films_dict
-
-#================ true code started from here =============================
 def actor_info(actor_code):
     actor_info_dict = dict()
     with open('names.tsv', 'r', encoding="utf-8") as f:
@@ -122,37 +57,73 @@ def get_film_raiting(film_code, from_file = 0, start_line = 0):
     print("get_film_raiting log :", film_raiting)
     return film_raiting
 
+
+def set_all_films_info(): 
+    with open('title.basics1.tsv', 'r', encoding="utf-8") as f:
+        next(f)
+        reader = csv.reader(f, delimiter='\t')
+        for line in reader:
+            all_films_info[line[0]] = {'startYear':int(line[5]) if line[5] != '\\N' else 0, 
+                            'primaryTitle':line[2] if line[2] != '\\N' else 'none',
+                            'originalTitle':line[3] if line[3] != '\\N' else 'none'}
+            
+    if len(all_films_info.keys()) > 0:
+        return len(all_films_info.keys())
+    else:
+        return 0
+
+
 # let full info about movie by film_code
-def get_films_info(film_code_lst, start_line = 0):
+def get_films_info(film_code_lst, from_file = 0, start_line = 0):
     n = 0
     count = 0
     film_info = dict()
     film_raiting = dict()
-    with open('title.basics1.tsv', 'r', encoding="utf-8") as f:
-        next(f)
-        reader = csv.reader(islice(f, start_line, None), delimiter='\t')
-        for line in reader:
-            if line[0] in film_code_lst:
-                count+=1
-                film_info[line[0]] = dict()
-                film_info[line[0]]['startYear'] = int(line[5]) if line[5] != '\\N' else 0
-                film_info[line[0]]['primaryTitle'] = line[2] if line[2] != '\\N' else 'none'
-                film_info[line[0]]['originalTitle'] = line[3] if line[3] != '\\N' else 'none'
-                film_info[line[0]]['genres'] = line[8] if line[5] != '\\N' else 0
-                film_raiting = get_film_raiting(line[0])
-                if len(film_raiting.keys()) > 0:
-                    film_info[line[0]]['averageRating'] = film_raiting['averageRating']
-                    film_info[line[0]]['numVotes'] = film_raiting['numVotes']
-                else:
-                    del film_info[line[0]]
-                    continue
-                if len(film_info.keys()) < count:
-                    break
-            # show progress
-            sys.stdout.write("\r Searching film #" + str(count) + ": [ %d"%n + " " + line[0] +" ] ")
-            sys.stdout.flush()
-            n+=1
-            
+    if from_file == 1:
+        with open('title.basics1.tsv', 'r', encoding="utf-8") as f:
+            next(f)
+            reader = csv.reader(islice(f, start_line, None), delimiter='\t')
+            for line in reader:
+                if line[0] in film_code_lst:
+                    count+=1
+                    film_info[line[0]] = dict()
+                    film_info[line[0]]['startYear'] = int(line[5]) if line[5] != '\\N' else 0
+                    film_info[line[0]]['primaryTitle'] = line[2] if line[2] != '\\N' else 'none'
+                    film_info[line[0]]['originalTitle'] = line[3] if line[3] != '\\N' else 'none'
+                    film_raiting = get_film_raiting(line[0])
+                    if len(film_raiting.keys()) > 0:
+                        film_info[line[0]]['averageRating'] = film_raiting['averageRating']
+                        film_info[line[0]]['numVotes'] = film_raiting['numVotes']
+                    else:
+                        del film_info[line[0]]
+                        continue
+                    if len(film_info.keys()) < count:
+                        break
+                # show progress
+                sys.stdout.write("\r Searching film #" + str(count) + ": [ %d"%n + " " + line[0] +" ] ")
+                sys.stdout.flush()
+                n+=1
+    else:
+        if len(all_films_info.keys()) <= 0:
+            set_all_films_info() 
+        i = 0
+        while i < len(film_code_lst):
+            film_code = film_code_lst[i]
+            i += 1
+            film_info[film_code] = dict()
+            film_info[film_code]['startYear'] = all_films_info[film_code]['startYear']
+            film_info[film_code]['primaryTitle'] = all_films_info[film_code]['primaryTitle']
+            film_info[film_code]['originalTitle'] = all_films_info[film_code]['originalTitle']
+            film_raiting = get_film_raiting(film_code)
+            if len(film_raiting.keys()) > 0:
+                film_info[film_code]['averageRating'] = film_raiting['averageRating']
+                film_info[film_code]['numVotes'] = film_raiting['numVotes']
+            else:
+                del film_info[film_code]
+                continue
+            if len(film_info.keys()) < count:
+                break
+    print("get_films_info log :", film_info)            
                        
     if len(film_info.keys()) <= 0:
         return 0
@@ -223,25 +194,44 @@ def get_df_year_film(all_film_info_by_actor_dict):
 #    [startYear, count_movies, summary_rating, summary_votes, avg_rating]
     return pd.DataFrame(df_year_film)
 
+
+def get_data_by_author(actor_code):
+    #work with actor
+    #actor_code = 'nm0000138'
+    actorinfo = actor_info(actor_code)
+    
+    all_film_codes_by_actor = list()
+    all_film_info_by_actor = dict()
+    all_film_codes_by_actor = get_film_codes_by_actor (actor_code)
+    
+    all_film_info_by_actor = get_films_info(all_film_codes_by_actor)
+    
+    actor_dinamo_data = get_df_year_film(all_film_info_by_actor)
+    
+    #read actor_dinamo_data from file
+    #actor_dinamo_data = pd.read_csv(actorinfo['id'] + "-" + actorinfo['primaryName'].replace(" ", "_") + ".tsv", sep='\t', encoding='utf-8')
+    
+    #set age values in actor_dinamo_data
+    for ind in actor_dinamo_data.index:
+        actor_dinamo_data['age_actor'][ind] = actor_dinamo_data['year'][ind] - int(actorinfo['birthYear'])
+        print (actor_dinamo_data['year'][ind], actor_dinamo_data['age_actor'][ind])    
+    actor_dinamo_data = actor_dinamo_data.sort_values(by=['year']) 
+    actor_dinamo_data.to_csv(actorinfo['id'] + "-" + actorinfo['primaryName'].replace(" ", "_") + ".tsv", sep='\t', encoding='utf-8')
+
+
+
+
 # --------------------------
 # main()
 # --------------------------
-#actors_dict_fin()
-#get_all_films_with_actor('nm0606487')
 
-
+#create common data-cache
 all_film_raiting = dict()
+all_films_info = dict()
 
-all_film_codes_by_actor = list()
-all_film_info_by_actor = dict()
+autors_list = ['nm0000255', 'nm0000242', 'nm0000354', 'nm0000142', 'nm0000158', 'nm0000163']
 
-#all_film_codes_by_actor = get_film_codes_by_actor ('nm0606487')
-actor_code = 'nm0000138'
-all_film_codes_by_actor = get_film_codes_by_actor (actor_code)
-#print(get_film_info('tt0021885'))
-all_film_info_by_actor = get_films_info(all_film_codes_by_actor)
-
-print(all_film_info_by_actor)
-actor_dinamo_data = get_df_year_film(all_film_info_by_actor)
-actorinfo = actor_info(actor_code)
-actor_dinamo_data.to_csv(actorinfo['id'] + "-" + actorinfo['primaryName'].replace(" ", "_") + ".tsv", sep='\t', encoding='utf-8')
+i = 0
+while i < len(autors_list):
+    get_data_by_author(autors_list[i])
+    i += 1
