@@ -2,6 +2,9 @@ import csv
 import sys
 from itertools import islice
 import pandas as pd
+import matplotlib
+import matplotlib.pyplot as plt
+import numpy as np
 
 def actor_info(actor_code):
     actor_info_dict = dict()
@@ -217,8 +220,27 @@ def get_data_by_author(actor_code):
         print (actor_dinamo_data['year'][ind], actor_dinamo_data['age_actor'][ind])    
     actor_dinamo_data = actor_dinamo_data.sort_values(by=['year']) 
     actor_dinamo_data.to_csv(actorinfo['id'] + "-" + actorinfo['primaryName'].replace(" ", "_") + ".tsv", sep='\t', encoding='utf-8')
+    plot_actors_dinamo(actor_dinamo_data, actorinfo)
+    
+    
+def plot_actors_dinamo(actor_dinamo_data, actorinfo):
+    # Data for plotting
 
-
+    x = actor_dinamo_data['year']
+    y = actor_dinamo_data['avg_rating']
+    y2 = actor_dinamo_data['count_movies']
+    
+    fig, ax = plt.subplots()
+    fig.set_size_inches(11.5, 4.5)
+    ax.plot(x, y, color='r', linewidth = 2, alpha = 0.7, antialiased = True)
+    ax1 = ax.twinx()
+    ax1.bar(x, y2, color='b', alpha = 0.5)
+    ax.set(xlabel = 'year', ylabel = 'average rating', title = actorinfo['primaryName'])
+    ax1.set_ylabel('count movies')
+    ax.grid()
+    
+    fig.savefig(actorinfo['id'] + "-" + actorinfo['primaryName'].replace(" ", "_") + ".png", dpi=150)
+    plt.show()
 
 
 # --------------------------
@@ -229,7 +251,12 @@ def get_data_by_author(actor_code):
 all_film_raiting = dict()
 all_films_info = dict()
 
-autors_list = ['nm0000255', 'nm0000242', 'nm0000354', 'nm0000142', 'nm0000158', 'nm0000163']
+autors_list = ['nm0000255', 'nm0000242', 'nm0000354', 
+               'nm0000142', 'nm0000158', 'nm0000163', 
+               'nm0000195', 'nm0000047', 'nm0000098', 
+               'nm0000139', 'nm0000170', 'nm0000182', 
+               'nm0000193', 'nm0000213', 'nm0000136', 
+               'nm0000235', 'nm0000226', 'nm0000138']
 
 i = 0
 while i < len(autors_list):
