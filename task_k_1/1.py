@@ -180,48 +180,76 @@ def get_film_codes_by_actor(actor_code):
     else:
         return 0
 
-def year_film(actor_code, year, actor_films_dict):
+def year_film(all_film_info_by_actor_dict):
     count_movies = 0
     summary_rating = 0.0
     summary_votes = 0.0
     avg_rating = 0.0
+    strYear = ''
+    valYear = 0
+    result = dict()
+    
+    
+    for key, val in all_film_info_by_actor_dict.items():
+        strYear = val['startYear']
+        valYear = int(strYear)
+        print(strYear, valYear, val['averageRating'],val['numVotes'])
+        
+        if strYear in result:
+            result[strYear]['summary_rating'] += val['averageRating']
+            result[strYear]['summary_votes'] += val['numVotes']
+            result[strYear]['count_movies'] += 1
+        else:
+            result[strYear] = dict()
+            result[strYear]['year'] = valYear
+            result[strYear]['summary_rating'] = val['averageRating']
+            result[strYear]['summary_votes'] = val['numVotes']
+            result[strYear]['count_movies'] = 1
+            result[strYear]['avg_rating'] = 0
+            result[strYear]['age_actor'] = 0
+    
+    for key, val in result.items():
+        val['avg_rating'] =  float(val['summary_rating']) /  int(val['count_movies'])
+        
+#    [startYear, count_movies, summary_rating, summary_votes, avg_rating]
+    return result
 
-    temp_lst = actor_films_dict[actor_code]
-    print(temp_lst) #['tt0104748', 'tt0114323', 'tt0117592',...]
-    basics_lst = []
-    rating_lst = []
-    with open('title.basics1.tsv', 'r', encoding='utf-8') as f:
-        next(f)
-        reader = csv.reader(f, delimiter='\t')
-        for line in reader:
-            if line[0] in temp_lst:
-                basics_lst.append(line)
-    # print('basics_lst:', basics_lst)
-
-    with open('title.ratings1.tsv', 'r', encoding='utf-8') as f:
-        next(f)
-        reader = csv.reader(f, delimiter='\t')
-        for line in reader:
-            if line[0] in temp_lst:
-                rating_lst.append(line)
-
-    for i in range(len(basics_lst)):
-        if int(basics_lst[i][4]) == int(year):
-            if basics_lst[i][5] == "\\N":
-                summary_rating += float(rating_lst[i][1])
-                count_movies += 1
-                summary_votes += float(rating_lst[i][2])
-
-        elif basics_lst[i][5] != "\\N":
-            if int(basics_lst[i][5]) == int(year):
-                summary_rating += float(rating_lst[i][1])
-                count_movies += 1
-                summary_votes += float(rating_lst[i][2])
-
-    if count_movies == 0:
-        avg_rating = 0
-    else:
-        avg_rating = summary_rating / count_movies
+#    temp_lst = actor_films_dict[actor_code]
+#    print(temp_lst) #['tt0104748', 'tt0114323', 'tt0117592',...]
+#    basics_lst = []
+#    rating_lst = []
+#    with open('title.basics1.tsv', 'r', encoding='utf-8') as f:
+#        next(f)
+#        reader = csv.reader(f, delimiter='\t')
+#        for line in reader:
+#            if line[0] in temp_lst:
+#                basics_lst.append(line)
+#    # print('basics_lst:', basics_lst)
+#
+#    with open('title.ratings1.tsv', 'r', encoding='utf-8') as f:
+#        next(f)
+#        reader = csv.reader(f, delimiter='\t')
+#        for line in reader:
+#            if line[0] in temp_lst:
+#                rating_lst.append(line)
+#
+#    for i in range(len(basics_lst)):
+#        if int(basics_lst[i][4]) == int(year):
+#            if basics_lst[i][5] == "\\N":
+#                summary_rating += float(rating_lst[i][1])
+#                count_movies += 1
+#                summary_votes += float(rating_lst[i][2])
+#
+#        elif basics_lst[i][5] != "\\N":
+#            if int(basics_lst[i][5]) == int(year):
+#                summary_rating += float(rating_lst[i][1])
+#                count_movies += 1
+#                summary_votes += float(rating_lst[i][2])
+#
+#    if count_movies == 0:
+#        avg_rating = 0
+#    else:
+#        avg_rating = summary_rating / count_movies
 
     # print('rating_lst:', rating_lst)
     # print('temp_lst:', temp_lst)
@@ -230,7 +258,7 @@ def year_film(actor_code, year, actor_films_dict):
     # print('summary_votes = ', summary_votes)
     # print("avg_rating = ", avg_rating)
 
-    return [count_movies, summary_rating, summary_votes, avg_rating]
+#    return [count_movies, summary_rating, summary_votes, avg_rating]
 
     # for j in range(len(basics_lst)):
     #     if basics_lst[j][5] == year:
@@ -292,6 +320,7 @@ def actors_dict_fin():
 all_film_raiting = dict()
 all_film_codes_by_actor = list()
 all_film_info_by_actor = dict()
+
 #all_film_codes_by_actor = get_film_codes_by_actor ('nm0606487')
 all_film_codes_by_actor = get_film_codes_by_actor ('nm0000022')
 #print(get_film_info('tt0021885'))
@@ -301,6 +330,9 @@ for elem in all_film_codes_by_actor:
         print(temp_dct)
         all_film_info_by_actor[elem] = temp_dct[elem]
 print(all_film_info_by_actor)
+
+
+
 #print(get_film_raiting('tt0000041'))
 #print(set_dict_all_film_raiting())
 #year_film('nm0606487', 2013)
@@ -308,3 +340,5 @@ print(all_film_info_by_actor)
 # actor_info('nm0666739')
 # all_about_actor('nm0666739')
 
+
+5 минут
