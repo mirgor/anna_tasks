@@ -1,6 +1,7 @@
 import csv
 import sys
 from itertools import islice
+import pandas as pd
 
 #for i in range(100+1):
 #    sys.stdout.write(('='*i)+(''*(100-i))+("\r [ %d"%i+"% ] "))
@@ -180,15 +181,10 @@ def get_film_codes_by_actor(actor_code):
     else:
         return 0
 
-def year_film(all_film_info_by_actor_dict):
-    count_movies = 0
-    summary_rating = 0.0
-    summary_votes = 0.0
-    avg_rating = 0.0
+def get_df_year_film(all_film_info_by_actor_dict):
     strYear = ''
     valYear = 0
-    result = dict()
-    
+    result = dict()    
     
     for key, val in all_film_info_by_actor_dict.items():
         strYear = val['startYear']
@@ -208,107 +204,25 @@ def year_film(all_film_info_by_actor_dict):
             result[strYear]['avg_rating'] = 0
             result[strYear]['age_actor'] = 0
     
+    df_year_film = dict()
+    df_year_film['year'] = []
+    df_year_film['summary_rating'] = []
+    df_year_film['summary_votes'] = []
+    df_year_film['count_movies'] = []
+    df_year_film['avg_rating'] = []
+    df_year_film['age_actor'] = []
+    
     for key, val in result.items():
         val['avg_rating'] =  float(val['summary_rating']) /  int(val['count_movies'])
+        df_year_film['year'].append(val['year'])
+        df_year_film['summary_rating'].append(val['summary_rating'])
+        df_year_film['summary_votes'].append(val['summary_votes'])
+        df_year_film['count_movies'].append(val['count_movies'])
+        df_year_film['avg_rating'].append(val['avg_rating'])
+        df_year_film['age_actor'].append(val['age_actor'])
         
 #    [startYear, count_movies, summary_rating, summary_votes, avg_rating]
-    return result
-
-#    temp_lst = actor_films_dict[actor_code]
-#    print(temp_lst) #['tt0104748', 'tt0114323', 'tt0117592',...]
-#    basics_lst = []
-#    rating_lst = []
-#    with open('title.basics1.tsv', 'r', encoding='utf-8') as f:
-#        next(f)
-#        reader = csv.reader(f, delimiter='\t')
-#        for line in reader:
-#            if line[0] in temp_lst:
-#                basics_lst.append(line)
-#    # print('basics_lst:', basics_lst)
-#
-#    with open('title.ratings1.tsv', 'r', encoding='utf-8') as f:
-#        next(f)
-#        reader = csv.reader(f, delimiter='\t')
-#        for line in reader:
-#            if line[0] in temp_lst:
-#                rating_lst.append(line)
-#
-#    for i in range(len(basics_lst)):
-#        if int(basics_lst[i][4]) == int(year):
-#            if basics_lst[i][5] == "\\N":
-#                summary_rating += float(rating_lst[i][1])
-#                count_movies += 1
-#                summary_votes += float(rating_lst[i][2])
-#
-#        elif basics_lst[i][5] != "\\N":
-#            if int(basics_lst[i][5]) == int(year):
-#                summary_rating += float(rating_lst[i][1])
-#                count_movies += 1
-#                summary_votes += float(rating_lst[i][2])
-#
-#    if count_movies == 0:
-#        avg_rating = 0
-#    else:
-#        avg_rating = summary_rating / count_movies
-
-    # print('rating_lst:', rating_lst)
-    # print('temp_lst:', temp_lst)
-    # print('count_movies = ', count_movies)
-    # print('summary_rating = ', summary_rating)
-    # print('summary_votes = ', summary_votes)
-    # print("avg_rating = ", avg_rating)
-
-#    return [count_movies, summary_rating, summary_votes, avg_rating]
-
-    # for j in range(len(basics_lst)):
-    #     if basics_lst[j][5] == year:
-    #         count_movies += 1
-    #         summary_rating += basics_lst[j][]
-
-    # print(basics_lst)
-
-
-def all_about_actor(actor_code):
-    main_dict = dict()
-    actor_info_lst = actor_info(actor_code)
-    actor_films_dict = actors_dict_fin()
-    if actor_info_lst[2] == 'null':
-        actor_age = 2018 - int(actor_info_lst[1])
-    else:
-        actor_age = int(actor_info_lst[2]) - int(actor_info_lst[1])
-    print(actor_info_lst, actor_age)
-    lst_of_movies = []
-    for i in range(int(actor_info_lst[1]), int(actor_info_lst[1]) + actor_age + 1):
-        # print(i)
-        lst_of_movies.append(year_film(actor_code, i, actor_films_dict))
-        # print(year_film(actor_code, i))
-    main_dict['actor_code'] = actor_code
-    main_dict['actor_name'] = actor_info_lst[0]
-    main_dict['birth_year'] = actor_info_lst[1]
-    main_dict['death_year'] = actor_info_lst[2]
-    main_dict['data'] = lst_of_movies
-
-    print(main_dict)
-    return main_dict
-
-#-> {actor_code: "nn...." , 
-#    actor_name: "Taylor Glen", 
-#    birth_year: 2000, 
-#    death_year: null, 
-#    data: [
-#       [рік, count movies, summary raiting, summary votes, avg rating],
-#       [рік, count movies, summary raiting, summary votes, avg rating]
-#   ]}
-
-
-def actors_dict_fin():
-    temp_lst = read_ratings1()
-    num = temp_lst[0]
-    film_code_set = temp_lst[1]
-    temp_lst2 = read_principals1(num, film_code_set)
-    n, set_with_actors, lst_with_actors = int(temp_lst2[0]), temp_lst2[1], temp_lst2[2]
-    actors_dict = make_actors_dict(n, set_with_actors, lst_with_actors)
-    return actors_dict
+    return pd.DataFrame(df_year_film)
 
 # --------------------------
 # main()
@@ -330,15 +244,4 @@ for elem in all_film_codes_by_actor:
         print(temp_dct)
         all_film_info_by_actor[elem] = temp_dct[elem]
 print(all_film_info_by_actor)
-
-
-
-#print(get_film_raiting('tt0000041'))
-#print(set_dict_all_film_raiting())
-#year_film('nm0606487', 2013)
-
-# actor_info('nm0666739')
-# all_about_actor('nm0666739')
-
-
-5 минут
+actor_dinamo_data = get_df_year_film(all_film_info_by_actor)
