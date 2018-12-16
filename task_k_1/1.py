@@ -136,6 +136,7 @@ def get_film_info(film_code):
         next(f)
         reader = csv.reader(islice(f, start_line, None), delimiter='\t')
         for line in reader:
+            print("log film_info:", line[0], start_line)
             if line[0] == film_code:
                 film_info[film_code] = dict()
                 film_info[film_code]['startYear'] = int(line[5])
