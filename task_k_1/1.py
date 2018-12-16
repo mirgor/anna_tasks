@@ -124,10 +124,14 @@ def get_film_raiting(film_code, from_file = 0):
     return film_raiting
 
 # let full info about movie by film_code
-def get_film_info(film_code, start_line = 0):
-    global last_row_in_file
-    n = start_line
+def get_film_info(film_code):
+#    global last_row_in_file
+    n = 0
+    start_line = int(film_code[2:]) - 5000
+    if start_line < 0 :
+        start_line = 0   
     film_info = dict()
+    
     with open('title.basics1.tsv', 'r', encoding="utf-8") as f:
         next(f)
         reader = csv.reader(islice(f, start_line, None), delimiter='\t')
@@ -143,11 +147,12 @@ def get_film_info(film_code, start_line = 0):
             sys.stdout.write("\r Searching film " + film_code + ": [ %d"%n + " " + line[0] +" ] ")
             sys.stdout.flush()
             n+=1
+            if int(line[0][2:]) > int(film_code[2:]) :
+                break
     film_raiting = get_film_raiting(film_code)
     film_info[film_code]['averageRating'] = film_raiting['averageRating'] 
     film_info[film_code]['numVotes'] = film_raiting['numVotes']
-    print("get_film_info log " , film_info, n)
-    last_row_in_file = n-1
+#    print("get_film_info log " , film_info, n)
     return film_info
         
 def get_film_codes_by_actor(actor_code):
@@ -280,14 +285,13 @@ def actors_dict_fin():
 
 all_film_raiting = dict()
 all_film_codes_by_actor = list()
-last_row_in_file = 0 #todo - change forsage reading method
 
 #all_film_codes_by_actor = get_film_codes_by_actor ('nm0606487') 
 all_film_codes_by_actor = get_film_codes_by_actor ('nm0000022') 
-
+#print(get_film_info('tt0021885'))
 for elem in all_film_codes_by_actor:
     print(elem, end=' ')
-    print(get_film_info(elem, last_row_in_file ))
+    print(get_film_info(elem))
 #print(get_film_raiting('tt0000041'))
 #print(set_dict_all_film_raiting())
 #year_film('nm0606487', 2013)
